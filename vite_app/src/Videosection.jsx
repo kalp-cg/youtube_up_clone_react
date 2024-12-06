@@ -26,12 +26,13 @@ const videos = [
         channel: "Channel Name",
         date: "Date",
     },
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-11.png?raw=true",
+    {   
+        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-11.png?raw=true" ,
         playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true",
         title: "Title of the Video",
         views: "12,000,000 views",
         channel: "Channel Name",
+        cover: "https://raw.githubusercontent.com/PatelNeelMahesh/frontend_tasks/refs/heads/main/02.youtube-clone/assets/live.png",
         date: "Date",
     },
 ];
@@ -129,7 +130,9 @@ function Videosection() {
                                 <img style={{
                                     width:'370px',
 
-                                }} src={video.thumbnail } alt="Video Thumbnail" />
+                                }} src={video.thumbnail } alt="Video Thumbnail" className='photo-layer'/>
+                                {index === 3 && <img src={video.cover} alt="Video Cover" className='photo-layer inner-photo'/>}
+                                
                                 <div className="cpy">
                                     <div className="play-btn">
                                         <img style={
@@ -191,6 +194,7 @@ function Videosection() {
                                     width:'370px',
                                     
                                 }} src={video.thumbnail} alt="Video Thumbnail" />
+                                
                                 <div className="play-btn">
                                     <img style={
                                             {
