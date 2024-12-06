@@ -215,9 +215,10 @@ body {
 } */
 
 .video .title {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top:10px;
+  margin-left: 10px;
 }
 
 .video .views,
@@ -233,4 +234,29 @@ body {
 }
 .cpy3{
   display: flex;
+}
+
+img:hover{
+  transform: scale(1.05);
+}
+
+video.thumbnail>img{
+    width: 200px;
+    height: 200px;
+}
+
+
+.video .title1 {
+  font-size: 20px;
+  font-weight: bold;
+ margin-top: -25px;
+  margin-left: -100px;
+}
+
+
+.video .title2 {
+  font-size: 20px;
+  font-weight: bold;
+ margin-top: -25px;
+  margin-left: -100px;
 }
