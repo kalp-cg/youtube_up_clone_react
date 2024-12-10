@@ -9,7 +9,7 @@ function Main() {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const response = await fetch('http://localhost:3000/videos');  
+                const response = await fetch('https://reactjs-js1212.onrender.com/videos');  
                 if (!response.ok) {
                     throw new Error('Failed to fetch videos');
                 }
