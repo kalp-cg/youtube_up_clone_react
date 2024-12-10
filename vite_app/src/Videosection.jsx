@@ -1,235 +1,153 @@
-import { useState } from 'react'
-import './App.css'
+import { useEffect, useState } from 'react';
+import './App.css';
 
-const videos = [
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-8.png?raw=true",
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(1).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-9.png?raw=true",
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(4).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-10.png?raw=true",
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
-    {   
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-11.png?raw=true" ,
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        cover: "https://raw.githubusercontent.com/PatelNeelMahesh/frontend_tasks/refs/heads/main/02.youtube-clone/assets/live.png",
-        date: "Date",
-    },
-];
+function Main() {
+    const [videos, setVideos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    useEffect(() => {
+        const fetchVideos = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/videos');  
+                if (!response.ok) {
+                    throw new Error('Failed to fetch videos');
+                }
+                const data = await response.json();
+                setVideos(data);  
+                setLoading(false);
+            } catch (err) {
+                setError(err.message);  
+                setLoading(false);
+            }
+        };
 
-const videos1 = [
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-4.png?raw=true" ,
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(1).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-5.png?raw=true",
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(4).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-6.png?raw=true",
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-7.png?raw=true",
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
+        fetchVideos();
+    }, []);
 
-];
+    if (loading) {
+        return <div>Loading videos...</div>;
+    }
 
-
-const videos2 = [
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail.png?raw=true",
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(1).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-1.png?raw=true",
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%201%20(4).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-2.png?raw=true",
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
-    {
-        thumbnail: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Thumbnail-3.png?raw=true",
-        playButton: "https://github.com/PatelNeelMahesh/frontend_tasks/blob/main/02.youtube-clone/assets/Ellipse%204%20(3).png?raw=true",
-        title: "Title of the Video",
-        views: "12,000,000 views",
-        channel: "Channel Name",
-        date: "Date",
-    },
-
-];
-
-
-function Videosection() {
-
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
-        <>
-            <div className="all">
+        <div className="all">
+           
 
+            
 
-
-
-                <div className="main-content">
-
-                    <div className="row">
-                        {videos.map((video, index) => (
-                            <div className="video" key={index}>
-                                <img style={{
-                                    width:'370px',
-
-                                }} src={video.thumbnail } alt="Video Thumbnail" className='photo-layer'/>
-                                {index === 3 && <img src={video.cover} alt="Video Cover" className='photo-layer inner-photo'/>}
-                                
-                                <div className="cpy">
-                                    <div className="play-btn">
-                                        <img style={
-                                            {
-                                                width:'45px',
-                                                height:'45px',
-                                                marginTop:'.5vh'
-                                            }
-                                        } src={video.playButton} alt="Play Button" />
-                                    </div>
-                                    <div className="cpy2">
-                                        <div className="title">{video.title}</div>
-                                        <div className="channel">{video.channel}</div>
-                                        {/* <div className="cpy1"> */}
-                                            <div className="views">{video.views}</div>
-                                            <div className="date">{video.date}</div>
-                                        {/* </div> */}
-                                    </div>
-                                </div>
+            <div className="main-content">
+                <div className="row">
+                    {videos.map((video, index) => (
+                        <div className="video" key={index}>
+                            <div className="photo-container">
+                                <img src={video.thumbnail} alt="Video Thumbnail" onError={(e) => e.target.src = 'https://via.placeholder.com/150'} />
                             </div>
-                        ))}
-                    </div>
-
-                    <hr />
-
-                    <div className="row">
-                        {videos1.map((video, index) => (
-                            <div className="video" key={index}>
-                                <img  style={{
-                                    width:'370px',
-                                    
-                                }} src={video.thumbnail} alt="Video Thumbnail" />
-                                <div className="play-btn">
-                                    <img style={
-                                            {
-                                                width:'45px',
-                                                height:'45px',
-                                                marginTop:'.5vh'
-                                            }
-                                        } src={video.playButton} alt="Play Button" />
-                                </div>
-                                <div className="title1">{video.title}</div>
+                            <div className="cpy">
+                                <div className="title">{video.title}</div>
                                 <div className="channel">{video.channel}</div>
-                                {/* <div className='cpy2'> */}
-                                <div className="views">{video.views}</div>
-                            
-                                <div className="date">{video.date}</div>
-                                {/* </div> */}
-                            </div>
-                        ))}
-                    </div>
-
-                    <hr />
-
-                    <div className="row">
-                        {videos2.map((video, index) => (
-                            <div className="video" key={index}>
-                                <img  style={{
-                                    width:'370px',
-                                    
-                                }} src={video.thumbnail} alt="Video Thumbnail" />
-                                
-                                <div className="play-btn">
-                                    <img style={
-                                            {
-                                                width:'45px',
-                                                height:'45px',
-                                                marginTop:'.5vh'
-                                            }
-                                        } src={video.playButton} alt="Play Button" />
+                                <div className="cpy3">
+                                    <div className="views">{video.views}</div>
+                                    <div className="date">{video.date}</div>
                                 </div>
-                                <div className="title2">{video.title}</div>
-                                <div className="channel">{video.channel}</div>
-                                {/* <div className='cpy3'> */}
-                                <div className="views">{video.views}</div>
-                              
-                                <div className="date">{video.date}</div>
-                                {/* </div> */}
                             </div>
-                        ))}
-                    </div>
-
+                        </div>
+                    ))}
                 </div>
-
-
-
-
-
-
-
-
-
-            </div >
-        </>
-
-    )
-
+            </div>
+        </div>
+    );
 }
 
-export default Videosection;
+export default Main;
+
+
+
+
+
+// import { useEffect, useState } from 'react';
+// import './App.css';
+
+// function Main() {
+//     const [videos, setVideos] = useState([]);
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState(null);
+
+//     useEffect(() => {
+//         const fetchVideos = async () => {
+//             const API_KEY = 'AIzaSyDT2Z7X9wZNdXiAm5GUGX_lwAIp06UEZcA'; // Replace with your API key
+//             const searchQuery = 'travel vlog'; // Replace with your desired search query
+//             const maxResults = 10;
+
+//             try {
+//                 const response = await fetch(
+//                     `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(searchQuery)}&maxResults=${maxResults}&key=${API_KEY}`
+//                 );
+
+//                 if (!response.ok) {
+//                     throw new Error('Failed to fetch videos');
+//                 }
+
+//                 const data = await response.json();
+
+//                 // Transform API response to match your existing format
+//                 const transformedVideos = data.items.map((item) => ({
+//                     title: item.snippet.title,
+//                     channel: item.snippet.channelTitle,
+//                     views: 'N/A', // YouTube API v3 does not provide views in the search endpoint; fetch details via `videos.list` if needed
+//                     date: new Date(item.snippet.publishedAt).toLocaleDateString(),
+//                     thumbnail: item.snippet.thumbnails.medium.url,
+//                 }));
+
+//                 setVideos(transformedVideos);
+//                 setLoading(false);
+//             } catch (err) {
+//                 setError(err.message);
+//                 setLoading(false);
+//             }
+//         };
+
+//         fetchVideos();
+//     }, []);
+
+//     if (loading) {
+//         return <div>Loading videos...</div>;
+//     }
+
+//     if (error) {
+//         return <div>Error: {error}</div>;
+//     }
+
+//     return (
+//         <div className="all">
+//             <div className="main-content">
+//                 <div className="row">
+//                     {videos.map((video, index) => (
+//                         <div className="video" key={index}>
+//                             <div className="photo-container">
+//                                 <img 
+//                                     src={video.thumbnail} 
+//                                     alt="Video Thumbnail" 
+//                                     onError={(e) => e.target.src = 'https://via.placeholder.com/150'} 
+//                                 />
+//                             </div>
+//                             <div className="cpy">
+//                                 <div className="title">{video.title}</div>
+//                                 <div className="channel">{video.channel}</div>
+//                                 <div className="cpy3">
+//                                     <div className="views">{video.views}</div>
+//                                     <div className="date">{video.date}</div>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     ))}
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default Main;
